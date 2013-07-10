@@ -60,8 +60,8 @@ var checkHtmlFile = function(htmlfile, checksfile) {
 
 
 
-var checkURLFile = function(URL_Default, checksfile){
-    rest.get(URL_Default).on('complete', checktheURL);
+var checkURLFile = function(URL, checksfile){
+    rest.get(URL).on('complete', checktheURL);
     var checktheURL = function(result, response) {
       $ = cheerioHtmlFile(URL_Default);
       var checks = loadChecks(checksfile).sort();
@@ -85,7 +85,7 @@ if(require.main == module) {
     program
         .option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
         .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
-        .option('-u, --URL <URL_file>', 'Path to URL', clone(checkURLFile), URL_Default)
+        .option('-u, --URL <URL_file>', 'Path to URL', clone(checkURLFile), URL_DEFAULT)
 	.parse(process.argv);
     var checkJson = checkHtmlFile(program.file, program.checks);
     var outJson = JSON.stringify(checkJson, null, 4);
