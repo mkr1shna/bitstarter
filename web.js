@@ -3,9 +3,8 @@ var express = require('express');
 var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
-  	var b = new Buffer(30);
-	b.write(fs.readFileSync("index.html"),"utf-8");
-	response.send(b.toString('utf-8'));
+	var k = fs.readFileSync('./bitstarter/index.html','utf-8');
+	response.send(k);
 });
 
 var port = process.env.PORT || 5000;
